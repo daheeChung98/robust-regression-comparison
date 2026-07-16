@@ -1,2 +1,19 @@
-# robust-regression-comparison
-A comparative study of OLS, Ridge, LASSO, and Huber regression under outliers and multicollinearity.
+# Robust Regression Comparison
+
+## Overview
+
+## Research Question
+
+## Motivation
+
+## Dataset
+
+## Methods
+
+## Experimental Design
+
+## Evaluation Metrics
+
+## Repository Structure
+
+## Future Work
