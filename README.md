@@ -176,7 +176,7 @@ Future work will extend this project by:
 
 - Injecting synthetic outliers (5%, 10%, and 20%)
 - Comparing robustness under heavy-tailed noise
-- Evaluating coefficient stability under contaminaion
+- Evaluating coefficient stability under contamination
 - Investigating adversarial covariate contamination
 
 ---
