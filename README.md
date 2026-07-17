@@ -59,3 +59,7 @@ The California Housing Dataset was selected for the following reasons:
 ## Repository Structure
 
 ## Future Work
+
+The current comparison was performed on the original California Housing Dataset,
+
+Future work will investigate the robustness of these regression models under synthetic outlier contamination (5%, 10%, and 20%) to better understand the advantages of Huber Regression in challenging settings.
