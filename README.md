@@ -56,7 +56,9 @@ The California Housing Dataset was selected for the following reasons:
 - RMSE
 - MAE
 - R<sup>2</sup>
-## Repository Structure
+## Discussion
+
+For a detailed interpretation, see `results/discussion.md`
 
 ## Future Work
 
