@@ -2,15 +2,47 @@
 
 ## Overview
 
+This project compares four widely used linear regression models:
+
+- Ordinary Least Squares (OLS)
+- Ridge Regression
+- LASSO Regression
+- Huber Regression
+
+using the California Housing Dataset.
+
+The primary objective is to investigate how regularization and robust loss functions influence model performance, coefficient estimation, and sensitivity to influential observations.
+
+---
+
 ## Research Question
 
+This project addresses the following questions:
+
+- How do OLS, Ridge, LASSO, and Huber Regression differ in predictive performance?
+- How does regularization affect estimated regression coefficients?
+- Does Huber regression produce more stable estimates when influential observations exist?
+- Which regression model provides the best trade-off between prediction accuracy and robustness?
+
+---
+
 ## Motivation
+
+Ordinary Least Squares (OLS) is one of the mose widely used regression methods, but it is highly sensitive to outliers because it minimizes squared residuals.
+
+Regularized regression methods such as Ridge, and LASSO improve coefficient stability and reduce overfitting, yet they are still based on squared-error loss.
+
+Hubere regression replaces the squared loss with the Huber loss, reducing the influence of large residuals while maintaining good statistical efficiency.
+
+This project aims to compare these approaches under the same experimental setting and build intuition about when robust regression becomes advantageous.
+
+---
 
 ## Dataset
 
 ### California Housing Dataset
 
-This project uses the **California Housing Dataset**, which is a widely used benchmark dataset for regression tasks. It contains housing information collected from districs in California and is available through `scikit-learn`.
+This project uses the **California Housing Dataset**, a standard benchmark dataset for regression probelms available through `scikit-learn`.
 
 **Dataset Summary**
 
@@ -42,35 +74,115 @@ The California Housing Dataset was selected for the following reasons:
 - The dataset is readily availbale through `scikit-learn`, ensuring reproducibility and ease of use.
 - In later experiments, synthetic outliers and additional noise will be introduced to evaluate how OLS, Ridge, LASSO, and Huber Regression perform under challenging data conditions.
 
-## Regression Models
+## Methods
+
+### Regression Models
 
 - Ordinary Least Squares (OLS)
 - Ridge Regression
 - LASSO Regression
 - Huber Regression
 
-## Evaluation Metrics
+### Data Processing
+
+- Train/Test Split
+- Feature Standardization
+- Model Training
+- Prediction
+
+### Evaluation Metrics
 
 - RMSE
 - MAE
 - R<sup>2</sup>
 
+---
+
 ## Results
 
-The detailed evaluation metrics are available in:
+### Model Performance
 
-- `results/metrics.csv`
+Evaluation results are available in
+```
+results/metrics.csv
+```
 
-The estimated regression coefficients are available in:
+### Estimated Coefficients
 
-- `results/coefficients.csv`
+Estimated regression coefficients are available in
 
-Additional interpretation can be found in:
+```
+results/coefficients.csv
+```
 
-- `results/discussion.md`
+### Interpretation
+
+Model interpretation and discussion are provided in
+
+```
+results/discussion.md
+```
+
+### Key Findings
+
+- All four models achieved comparable predictive performance on the original dataset.
+- Ridge and LASSO shrank regression coefficients compared with OLS.
+- Huber regression produced similar prediction accuracy while reducing the influence of observations with unusually large residuals.
+- The largest coefficient changes were observed for **AveOccup**, suggesting sensitivity to influential observations.
+
+---
+
+## Representative Figures
+
+The repository includes visualizations comparing the regression models, including:
+
+- Regression coefficient comparison
+- Residual distribution
+- Actual vs OLS Predicted values
+- Residual vs Huber Predicted values
+
+Figures are stored in:
+
+```
+figures/
+```
+
+---
+
+## Project Structure
+
+```
+robust-regression-comparison/
+│
+├── data/
+├── notebooks/
+├── src/
+├── figures/
+├── results/
+│   ├── metrics.csv
+│   ├── coefficients.csv
+│   └── discussion.md
+├── README.md
+└── requirements.txt
+```
+
+---
 
 ## Future Work
 
-The current comparison was performed on the original California Housing Dataset,
+The current analysis evaluates regression models on the original California Housing Dataset.
 
-Future work will investigate the robustness of these regression models under synthetic outlier contamination (5%, 10%, and 20%) to better understand the advantages of Huber Regression in challenging settings.
+Future work will extend this project by:
+
+- Injecting synthetic outliers (5%, 10%, and 20%)
+- Comparing robustness under heavy-tailed noise
+- Evaluating coefficient stability under contaminaion
+- Investigating adversarial covariate contamination
+
+---
+
+## References
+
+- Scikit-learn Developers. *California Housing Dataset.*
+- Huber, P. J. (1964). Robust Estimation of a Location Parameter.
+- Hastie, Tibshirani, & Friedman. *The Elements of Statistical Learning.*
