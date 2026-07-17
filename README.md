@@ -42,8 +42,6 @@ The California Housing Dataset was selected for the following reasons:
 - The dataset is readily availbale through `scikit-learn`, ensuring reproducibility and ease of use.
 - In later experiments, synthetic outliers and additional noise will be introduced to evaluate how OLS, Ridge, LASSO, and Huber Regression perform under challenging data conditions.
 
-## Methods
-
 ## Regression Models
 
 - Ordinary Least Squares (OLS)
@@ -56,9 +54,20 @@ The California Housing Dataset was selected for the following reasons:
 - RMSE
 - MAE
 - R<sup>2</sup>
-## Discussion
 
-For a detailed interpretation, see `results/discussion.md`
+## Results
+
+The detailed evaluation metrics are available in:
+
+- `results/metrics.csv`
+
+The estimated regression coefficients are available in:
+
+- `results/coefficients.csv`
+
+Additional interpretation can be found in:
+
+- `results/discussion.md`
 
 ## Future Work
 
