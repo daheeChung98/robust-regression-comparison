@@ -26,10 +26,10 @@ This indicates that Huber Loss reduced the influence of observations with unusal
 
 | Model | RMSE | MAE | R<sup>2</sup> |
 |------|------|------|------|
-| OLS | ... | ... | ... |
-| Ridge | ... | ... | ... |
-| LASSO | ... | ... | ... |
-| Huber | ... | ... | ... |
+| OLS | 0.7456 | 0.5332 | 0.5758 |
+| Ridge | 0.7456 | 0.5332 | 0.5758 |
+| LASSO | 0.7404 | 0.5353 | 0.5816 |
+| Huber | 0.7584 | 0.5158 | 0.5610 |
 
 Although all four models achieved similar predictive performance on the original dataset,
 their coefficient estimates revealed meaningful differences.
