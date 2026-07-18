@@ -2,16 +2,16 @@
 
 ## Overview
 
-This project compares four widely used linear regression models:
+This project investigate the robustness of four linear regression methods under progressively more challenging data conditions.
 
-- Ordinary Least Squares (OLS)
-- Ridge Regression
-- LASSO Regression
-- Huber Regression
+The analysis begins with a baseline comparison on the original California Housing Dataset and then evaluates model behavior under synthetic response contamination.
 
-using the California Housing Dataset.
+Rather than comparing predictive performance alone, this project focuses on two complementary aspects:
 
-The primary objective is to investigate how regularization and robust loss functions influence model performance, coefficient estimation, and sensitivity to influential observations.
+- Predictive performance (RMSE, MAE, R<sup>2</sup>)
+- Coefficients stability under data contamination
+
+The goal is to understand when robust regression methods become advantageous over classical least-squares approahces.
 
 ---
 
@@ -19,10 +19,10 @@ The primary objective is to investigate how regularization and robust loss funct
 
 This project addresses the following questions:
 
-- How do OLS, Ridge, LASSO, and Huber Regression differ in predictive performance?
-- How does regularization affect estimated regression coefficients?
-- Does Huber regression produce more stable estimates when influential observations exist?
-- Which regression model provides the best trade-off between prediction accuracy and robustness?
+1. How do OLS, Ridge, LASSO, and Huber Regression compare on clean benchmark data?
+2. How does prediction performance change as the proportion of contaminated observsations increases?
+3. Which regression method provides the most stable coefficient estimates undr abnormal observations?
+4. Under what data conditions does robust regression outperform classical regression?
 
 ---
 
@@ -74,6 +74,36 @@ The California Housing Dataset was selected for the following reasons:
 - The dataset is readily availbale through `scikit-learn`, ensuring reproducibility and ease of use.
 - In later experiments, synthetic outliers and additional noise will be introduced to evaluate how OLS, Ridge, LASSO, and Huber Regression perform under challenging data conditions.
 
+## Experimental Design
+
+### Phase 1 - Baseline Comparison
+
+The original California Housing Dataset was used to compare
+
+- OLS
+- Ridge
+- LASSO
+- Huber Regression
+
+### Phase 2 - Synthetic Response Contamination
+
+Artificial outliers were injected into the response variable.
+
+Contamination levels:
+
+- 0%
+- 5%
+- 10%
+- 20%
+
+Each experiment was repeated 30 times using different random seeds.
+
+Performance metrics and regression coefficients were summarized using mean ± standard deviation.
+
+### Phase 3 (Planned): Feature Contamination
+
+### Phase 4 (Planned): Heavy-tailed Noise
+
 ## Methods
 
 ### Regression Models
@@ -100,6 +130,24 @@ The California Housing Dataset was selected for the following reasons:
 
 ## Results
 
+### Baseline Results
+
+On the original California Housing Dataset, all four regression models achieved comparable predictive performance.
+
+This suggests that the benchmark dataset contains relatively few influential observations.
+
+### Response Contamination Results
+
+Synthetic contamination revealed substantial differences between classical and robust regression.
+
+As contamination increased,
+
+- OLS showed rapidly increasing prediction errors.
+- Ridge and LASSO exhibited similar degradation.
+- Huber Regression maintained comparatively stable performance across all contamination levels.
+
+The robustness advangage of Huber Regression became increasingly evident under severe contamination.
+
 ### Model Performance
 
 Evaluation results are available in
@@ -122,26 +170,30 @@ Model interpretation and discussion are provided in
 ```
 results/discussion.md
 ```
-
-### Key Findings
-
-- All four models achieved comparable predictive performance on the original dataset.
-- Ridge and LASSO shrank regression coefficients compared with OLS.
-- Huber regression produced similar prediction accuracy while reducing the influence of observations with unusually large residuals.
-- The largest coefficient changes were observed for **AveOccup**, suggesting sensitivity to influential observations.
-
 ---
 
 ## Representative Figures
 
-The repository includes visualizations comparing the regression models, including:
+The repository includes the following visualizations.
+
+### Baseline
 
 - Regression coefficient comparison
 - Residual distribution
 - Actual vs OLS Predicted values
 - Residual vs Huber Predicted values
 
-Figures are stored in:
+### Synthetic Response Contamination
+
+- RMSE vs Contamination
+- MAE vs Contamination
+- R<sup>2</sup> vs Contamination
+- Coefficient Stability
+- RMSE Boxplot
+- Residual Distribution
+- Prediction vs Actual
+
+All figures are stored in
 
 ```
 figures/
@@ -170,14 +222,14 @@ robust-regression-comparison/
 
 ## Future Work
 
-The current analysis evaluates regression models on the original California Housing Dataset.
+This project will be extended by introducing more realistic contamination mechanisms.
 
-Future work will extend this project by:
+Planned experiments include:
 
-- Injecting synthetic outliers (5%, 10%, and 20%)
-- Comparing robustness under heavy-tailed noise
-- Evaluating coefficient stability under contamination
-- Investigating adversarial covariate contamination
+- Feature contamination
+- Heavy-tailed noise
+
+These extensions will provide a more comprehensive benchmark for robust regression methods.
 
 ---
 
