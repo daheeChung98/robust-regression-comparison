@@ -214,3 +214,77 @@ Future experiments will investigate
 - heavy-tailed predictor distributions
 
 These experiments will further clarify the strengths and limitations of different robust regression techniques under realistic data-quality challenges.
+
+# Heavy-tailed Noise
+
+Heavy-tailed noise was introduced into the response variable by adding random errors sampled from a Student's t distribution (df = 3).
+
+Unlike the response contamination experiment, which injected a small number of extreme outliers, heavy-tailed noise affected the entire training dataset by increasing the probability of large residuals.
+
+This setting evaluates model robustness when the Gaussian error assumption is violated.
+
+## 1. Main Findings
+
+The heavy-tailed noise experiment revealed several important observations.
+
+- OLS exhibited increased prediction errors because squared-error loss is highly sensitive to frequent large residuals.
+- Ridge Regression reduced coefficient variance through L2 regularization but remained sensitive to heavy-tailed errors.
+- LASSO continued to perform feature selection but showed similar sensitivity to non-Gaussian residuals.
+- Huber Regression maintained comparatively stable prediction performance and coefficient estimates by reducing the influence of large residuals.
+
+Overall, heavy-tailed noise affected both predictive performance and coefficient stability, with Huber Regression showing the greatest robustness.
+
+## 2. Interpretation
+
+### Why was Heavy-tailed Noise different?
+
+Unlike isolated response contamination, heavy-tailed noise changes the entire error distribution.
+
+Instead of a few abnormal observations, moderately large residuals occur much more frequently throughout the dataset.
+
+Because OLS, Ridge, and LASSO all minimize squared-error loss, they assign disproportionately large weight to these residuals.
+
+Huber Regression limits the influence of large residuals through the Huber loss function, allowing parameter estimation to remain more stable under non-Gaussian error distributions.
+
+This experiment demonstrates that robust loss functions remain beneficial even when abnormal observations arise naturally rather than through explicit contamination.
+
+## 3. Statistical Insight
+
+The comparison between response contamination and heavy-tailed noise highlights another important distinction.
+
+Response contamination introduces a relatively small number of extreme observations.
+
+Heavy-tailed noise changes the probability distribution of the residuals, increasing the likelihood of moderate and large errors across the entire dataset.
+
+Although both violate the Gaussian assumption, they represent different sources of model uncertainty.
+
+The experiment illustrates that robustness should be evaluated under both isolated outliers and distributional misspecification.
+
+## 4. Practical Implications
+
+Heavy-tailed error distributions are common in many real-world applications, including
+
+- financial returns
+- insurance claims
+- biomedical measurements
+- environmental observations
+
+In these settings, assuming normally distributed errors may underestimate the frequency of extreme observations.
+
+The results suggest that robust regression methods such as Huber Regression can improve both prediction reliability and coefficient stability when the underlying error distribution deviates from normality.
+
+## 5. Limitations
+
+The experiment considered only one heavy-tailed distribution generated from a Student's t distribution with three degrees of freedom.
+
+In addition, noise was added only to the response variable while the explanatory variables remained unchanged.
+
+Further investigation is required to evaluate different tail heaviness and more complex non-Gaussian data-generating processes.
+
+## 6. Conclusion
+
+The heavy-tailed noise experiment complements the previous contamination studies by examining robustness under distributional misspecification rather than isolated outliers.
+
+Across all experiments, Huber Regression consistently demonstrated greater robustness than classical least-squares methods while maintaining competitive predictive performance.
+
+These findings suggest that robust regression methods provide practical advantages whenever real-world data deviate from ideal Gaussian assumptions, whether through response outliers, contaminated predictors, or heavy-tailed error distributions.
