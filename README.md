@@ -2,16 +2,18 @@
 
 ## Overview
 
-This project investigate the robustness of four linear regression methods under progressively more challenging data conditions.
+This project presents a systematic benchmark of four linear regression methods under progressively more challenging data conditions.
 
-The analysis begins with a baseline comparison on the original California Housing Dataset and then evaluates model behavior under synthetic response contamination.
+Rather than evaluating predictive accuracy alone, the project investigates how different forms of data contamination influence both prediction performance and coefficient stability.
 
-Rather than comparing predictive performance alone, this project focuses on two complementary aspects:
+Four experimental settings are considered:
 
-- Predictive performance (RMSE, MAE, R<sup>2</sup>)
-- Coefficients stability under data contamination
+- Baseline
+- Response Contamination
+- Feature Contamination
+- Heavy-tailed Noise
 
-The goal is to understand when robust regression methods become advantageous over classical least-squares approahces.
+This study demonstrates that model robustness depends strongly on the type of abnormal observations present in the data.
 
 ---
 
@@ -178,6 +180,28 @@ Key observations include
 - Huber Regression showed improved robustness compared with classical least-squares methods, although its advantage was less pronounced than under response contamination.
 - Coefficient stability provided additional insight beyond predictive accuracy, highlighting the importance of examining parameter estimates when evaluating regression robustness.
 
+### Heavy-tailed Noise Results
+
+Heavy-tailed noise was generated using a Student's t distribution (df = 3), replacing the Gaussian error assumption with a more realistic non-normal error distribution.
+
+Key observations:
+
+- OLS experienced noticeable degradation due to the increased frequency of large residuals.
+- Ridge and LASSO remained sensitive because both optimize squared-error loss.
+- Huber Regression consistently produced the most stable coefficients and competitive prediction performance.
+- The experiment demonstrates that robust loss functions remain effective even when abnormal observations arise from the underlying error distribution rather than isolated outliers.
+
+## Key Findings
+
+Across all experiments, several consistent patterns emerged.
+
+- On clean benchmark data, all four regression methods achieved comparable predictive performance.
+- Response contamination revealed the largest advantage of Huber Regression, which maintained stable prediction accuracy despite increasing levels of abnormal observations.
+- Feature contamination primarily affected coefficient estimates rather than prediction accuracy, highlighting the importance of parameter stability.
+- Heavy-tailed noise demonstrated that robust loss functions remain beneficial even when abnormal observations arise naturally from non-Gaussian error distributions.
+
+Overall, this benchmark suggests that evaluating regression models solely on clean datasets may underestimate the practical value of robust regression methods.
+
 ### Model Performance
 
 Evaluation results are available in
@@ -232,6 +256,16 @@ The repository includes the following visualizations.
 - Residual distribution
 - Performance comparison
 
+### Heavy-tailed Noise
+
+- Student's t Noise Distribution
+- Normal vs Heavy-tailed Noise
+- RMSE Comparison
+- Regression Coefficient Comparison
+- Coefficient Shift from Baseline
+- Residual Distribution (OLS vs Huber)
+- Prediction vs Actual (Huber Regression)
+
 All figures are stored in
 
 ```
@@ -245,9 +279,7 @@ figures/
 ```
 robust-regression-comparison/
 │
-├── data/
 ├── notebooks/
-├── src/
 ├── figures/
 ├── results/
 ├── README.md
@@ -256,15 +288,15 @@ robust-regression-comparison/
 
 ---
 
-## Future Work
+## Conclusion
 
-This project will be extended by introducing more realistic contamination mechanisms.
+This project presented a systematic benchmark comparing OLS, Ridge, LASSO, and Huber Regression under progressively more challenging data conditions.
 
-Planned experiments include:
+Across four experimental settings—including clean data, response contamination, feature contamination, and heavy-tailed noise—Huber Regression consistently demonstrated the strongest robustness while maintaining competitive predictive performance.
 
-- Heavy-tailed noise
+The experiments further show that different contamination mechanisms affect regression models in fundamentally different ways. Consequently, robust regression should be evaluated not only by predictive accuracy but also by the stability and interpretability of estimated coefficients.
 
-These extensions will provide a more comprehensive benchmark for robust regression methods.
+This benchmark provides a practical reference for selecting regression methods when working with real-world datasets that deviate from ideal statistical assumptions.
 
 ---
 
