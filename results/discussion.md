@@ -142,3 +142,75 @@ Future experiments will extend this benchmark by introducing
 - Heavy-tailed noise
 
 The objective is to investigate how different types of abnormal observations influence both prediction accuracy and coefficient stability.
+
+# Feature Contamination
+
+Artificial outliers were introduced into selected explanatory variables (AveOccup and MedInc) to investigate the robustness of regression models against abnormal predictor values.
+
+Unlike the previous experiment, the response variable remained unchanged while only the explanatory variables were contaminated.
+
+This setting evaluates model sensitivity to leverage points rather than response outliers.
+
+## 1. Main Findings
+
+The feature contamination experiment produced several important observations.
+
+- OLS coefficients changed noticeably after contamination.
+- Ridge Regression reduced coefficient fluctuations through L2 regularization but remained influenced by contaminated predictors.
+- LASSO continued to shrink less informative variables but was not immune to leverage points.
+- Huber Regression generally produced more stable coefficient estimates, although its improvement was smaller than in the response contamination experiment.
+
+Overall, predictor contamination affected parameter estimation more strongly than prediction accuracy.
+
+## 2. Interpretation
+
+### Why was Feature Contamination different?
+
+Huber Regression is designed to reduce the influence of large residuals.
+
+However, feature contamination introduces high-leverage observations that can influence the fitted regression function before residuals become large.
+
+Consequently, Huber Regression remains more robust than ordinary least squares but cannot completely eliminate the influence of contaminated predictors.
+
+This experiment demonstrates that robust loss functions alone may not fully address leverage-point problems.
+
+## 3. Statistical Insight
+
+The comparison between response contamination and feature contamination highlights an important distinction.
+
+Response contamination primarily creates large residuals.
+
+Feature contamination creates influential observations in the predictor space.
+
+Although both scenarios involve abnormal observations, they affect regression estimation through different mechanisms.
+
+Consequently, robustness against response outliers does not necessarily imply robustness against leverage points.
+
+## 4. Practical Implications
+
+Many real-world datasets contain abnormal predictor values arising from
+
+- recording errors
+- sensor failures
+- data integration issues
+- extreme population subgroups
+
+The experiment demonstrates that evaluating predictive performance alone may overlook substantial instability in regression coefficients.
+
+Therefore, coefficient stability should be considered alongside predictive accuracy when comparing regression methods.
+
+## 5. Limitations
+
+Only two explanatory variables were contaminated in this experiment.
+
+Furthermore, contamination was generated through simple multiplicative perturbations rather than realistic adversarial mechanisms.
+
+Additional studies are required to evaluate more complex contamination patterns.
+
+## 6. Future Work
+
+Future experiments will investigate
+
+- heavy-tailed predictor distributions
+
+These experiments will further clarify the strengths and limitations of different robust regression techniques under realistic data-quality challenges.
