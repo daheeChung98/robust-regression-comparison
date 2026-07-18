@@ -1,5 +1,7 @@
 # Discussion
 
+# Baseline Results
+
 ## 1. Summary of Results
 
 | Model | RMSE | MAE | R<sup>2</sup> |
@@ -83,3 +85,62 @@ The dataset contains relatively few extreme outliers, which may limit the observ
 ## 5. Future Work
 
 Introduce synthetic outliers (5%, 10%, and 20%) and compare the robustness of the four regression models.
+
+---
+
+# Response Contamination
+
+Artificial response contamination was introduced to investigate the robustness of different regression methods under abnormal observations.
+
+For each contamination level (0%, 5%, 10%, 20%), the experiment was repeated 30 times using different random seeds.
+
+Average performance metrics were computed across repeated simulations.
+
+## Main Findings
+
+The baseline comparison showed relatively small differences among the four regression models.
+
+However, introducing synthetic contamination substantially changed the conclusions.
+
+As contamination increased,
+
+- OLS exhibited rapidly increasing RMSE and MAE.
+- Ridge and LASSO remained sensitive because they still optimize squared-error loss.
+- Huber Regression consistently produced lower prediction errors and more stable coefficients.
+
+## Coefficient Stability
+
+Regression coefficients estimated by OLS became increasingly unstable as contamination increased.
+
+Huber Regression maintained considerably more stable coefficient estimates across repeated experiments.
+
+The larges differences were observed for variables that were strongly affected by contaminated observations, indicating that robust estimation can improve model interpretability in addition to prediction accuracy.
+
+## Practical Implications
+
+The experiments demonstrate that evaluating regression models only on clean benchmark datasets may underestimate the practical value of robust regression.
+
+Real-world datasets frequently contain
+
+- recording errors
+- abormal observations
+- heavy-tailed noise
+
+Undeer these conditions, robust regression methods can substantially improve both predictive performance and parameter stability.
+
+## Limitaions
+
+The current contamination mechanism only modifies the response vaiable.
+
+Although this experiment illustrates the robustness of Huber Regression, it does not fully capture more realistic data-quality issues such as leverage points or heavy-tailed covariates.
+
+These scenarios will be investigated in subsequent experiments.
+
+## Future Work
+
+Future experiments will extend this benchmark by introducing
+
+- Feature contamination
+- Heavy-tailed noise
+
+The objective is to investigate how different types of abnormal observations influence both prediction accuracy and coefficient stability.
