@@ -1,5 +1,3 @@
-# Discussion
-
 # Baseline Results
 
 ## 1. Summary of Results
@@ -96,7 +94,7 @@ For each contamination level (0%, 5%, 10%, 20%), the experiment was repeated 30 
 
 Average performance metrics were computed across repeated simulations.
 
-## Main Findings
+## 1. Main Findings
 
 The baseline comparison showed relatively small differences among the four regression models.
 
@@ -108,7 +106,7 @@ As contamination increased,
 - Ridge and LASSO remained sensitive because they still optimize squared-error loss.
 - Huber Regression consistently produced lower prediction errors and more stable coefficients.
 
-## Coefficient Stability
+## 2. Coefficient Stability
 
 Regression coefficients estimated by OLS became increasingly unstable as contamination increased.
 
@@ -116,7 +114,7 @@ Huber Regression maintained considerably more stable coefficient estimates acros
 
 The larges differences were observed for variables that were strongly affected by contaminated observations, indicating that robust estimation can improve model interpretability in addition to prediction accuracy.
 
-## Practical Implications
+## 3. Practical Implications
 
 The experiments demonstrate that evaluating regression models only on clean benchmark datasets may underestimate the practical value of robust regression.
 
@@ -128,7 +126,7 @@ Real-world datasets frequently contain
 
 Undeer these conditions, robust regression methods can substantially improve both predictive performance and parameter stability.
 
-## Limitaions
+## 4. Limitaions
 
 The current contamination mechanism only modifies the response vaiable.
 
@@ -136,7 +134,7 @@ Although this experiment illustrates the robustness of Huber Regression, it does
 
 These scenarios will be investigated in subsequent experiments.
 
-## Future Work
+## 5. Future Work
 
 Future experiments will extend this benchmark by introducing
 
